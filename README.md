@@ -1,2 +1,2 @@
 # Event-Management-Systems
-this project is for Event systems
+this project is for Event system
