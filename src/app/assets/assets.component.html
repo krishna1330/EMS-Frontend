@@ -1,0 +1,33 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<br>
+<h4 class="heading-fancy">&nbsp; Assets Details</h4>
+<br>
+<table class="table table-striped">
+    <thead class="">
+        <tr>
+            <!-- <th>Asset Id</th> -->
+            <th>Asset Name</th>
+            <th>Asset Description</th>
+            <th>Cost Per Day</th>
+            <th>Stock Availability</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let asset of assets">
+            <!-- <td>{{ asset.assetId }}</td> -->
+            <td>{{ asset.assetName }}</td>
+            <td>{{ asset.assetDescription }}</td>
+            <td>{{ asset.assetCostPerDay }}</td>
+            <td>{{ asset.assetStockAvailability }}</td>
+            <td>
+                <a href="#" title="Edit"><i class="fa-regular fa-pen-to-square" style="color: #333;"></i></a>
+                &nbsp;
+                <a href="#" title="Delete"><i class="fa-solid fa-trash" style="color: #333;"></i></a>
+
+            </td>
+        </tr>
+    </tbody>
+</table>
