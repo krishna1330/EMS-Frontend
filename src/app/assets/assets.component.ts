@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IAssets } from './assets';
 import { AssetsService } from '../assets.service';
+import { error } from 'jquery';
 
 @Component({
   selector: 'app-assets',
@@ -56,7 +57,7 @@ export class AssetsComponent implements OnInit {
     this.forEdit = true;
   }
 
-  postData(): void {
+  editAsset(): void {
     const asset: IAssets = {
       assetId: this.assetId,
       assetName: this.assetName,
@@ -64,12 +65,11 @@ export class AssetsComponent implements OnInit {
       assetCostPerDay: this.assetCostPerDay,
       assetStockAvailability: this.assetStockAvailability
     };
-    console.log(asset);
-    this._assetsService.postData(asset).subscribe(
+
+    this._assetsService.editAsset(asset).subscribe(
       (response) => {
         this.closeModal();
-        console.log(response);
-        alert('Asset Updated Successfully');
+        alert(JSON.parse(response).message);
         window.location.reload();
       },
       (error) => {
@@ -78,9 +78,44 @@ export class AssetsComponent implements OnInit {
     );
   }
 
+  addAsset(): void {
+    const asset: IAssets = {
+      assetId: 0,
+      assetName: this.assetName,
+      assetDescription: this.assetDescription,
+      assetCostPerDay: this.assetCostPerDay,
+      assetStockAvailability: this.assetStockAvailability
+    };
+
+    this._assetsService.addAsset(asset).subscribe(
+      (response) => {
+        this.closeModal();
+        alert(JSON.parse(response).message);
+        window.location.reload();
+      },
+      (error) => {
+        console.log('Error: ' + error);
+      }
+    )
+  }
+
+  deleteAsset(assetId: number): void {
+    var confirmToDelete = confirm("Do you want to delete?");
+    if (confirmToDelete) {
+      this._assetsService.deleteAsset(assetId).subscribe(
+        (response) => {
+          this.closeModal();
+          alert(JSON.parse(response).message);
+          window.location.reload();
+        },
+        (error) => {
+          console.log('Error: ' + error);
+        }
+      )
+    }
+  }
 
   closeModal() {
-    console.log("---");
     this.showModal = false;
   }
 }

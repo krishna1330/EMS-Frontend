@@ -44,7 +44,9 @@
                     <i class="fa-regular fa-pen-to-square" style="color: #333;"></i>
                 </a>
                 &nbsp;
-                <a href="#" title="Delete"><i class="fa-solid fa-trash" style="color: #333;"></i></a>
+                <a href="#" title="Delete" (click)="deleteAsset(asset.assetId)">
+                    <i class="fa-solid fa-trash" style="color: #333;"></i>
+                </a>
             </td>
         </tr>
     </tbody>
@@ -95,12 +97,12 @@
             
             <div class="modal-footer" *ngIf="forAdd">
                 <button type="button" class="btn btn-dark" id="btnAdd" class="btn btn-clr"
-                    (click)="postData()">Add</button>
+                    (click)="addAsset()">Add</button>
             </div>
 
             <div class="modal-footer" *ngIf="forEdit">
                 <button type="button" class="btn btn-dark" id="btnUpdate" class="btn btn-clr"
-                    (click)="postData()">Update</button>
+                    (click)="editAsset()">Update</button>
             </div>
         </div>
     </div>
