@@ -1,8 +1,25 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+    integrity="sha384-UoTzs11M6E7TlH+6LE5i9bQJj8SIfjsJUGaO+qVZJqVehdUW7hoQL5xYNsnGVCzN"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgydA7NiLd0S+BX9u6/LyCWpSMEDDDqPyCq5S6Lq8EG1jb6tFPr1dOZLUhE+"
+    crossorigin="anonymous"></script>
+
 <br>
-<h4 class="heading-fancy">&nbsp; Assets Details</h4>
+<div class="d-flex justify-content-between align-items-center">
+    <h4 class="heading-fancy mb-0">Assets Details</h4>
+    <h4 class="mb-0">
+        <i class="fa-solid fa-circle-plus fa-2x" (click)="onAdd()" style="cursor: pointer;" title="Add Asset"></i>
+    </h4>
+</div>
+
 <br>
 <table class="table table-striped">
     <thead class="">
@@ -23,11 +40,68 @@
             <td>{{ asset.assetCostPerDay }}</td>
             <td>{{ asset.assetStockAvailability }}</td>
             <td>
-                <a href="#" title="Edit"><i class="fa-regular fa-pen-to-square" style="color: #333;"></i></a>
+                <a href="#" title="Edit" (click)="onEdit(asset)" data-toggle="modal" data-target="#editModal">
+                    <i class="fa-regular fa-pen-to-square" style="color: #333;"></i>
+                </a>
                 &nbsp;
                 <a href="#" title="Delete"><i class="fa-solid fa-trash" style="color: #333;"></i></a>
-
             </td>
         </tr>
     </tbody>
 </table>
+
+<!-- Modal -->
+<div class="modal" tabindex="-1" role="dialog" [style.display]="showModal ? 'block' : 'none'">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="editAssetTxt" *ngIf="forEdit">Edit Asset</h4>
+                <h4 class="modal-title" id="addAssetTxt" *ngIf="forAdd">Add Asset</h4>
+                <button type="button" class="close" (click)="closeModal()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="assetname">Asset Name<font style="color:red;">*</font></label>
+                        <input type="text" class="form-control" id="assetname" placeholder="Enter Asset Name"
+                            [(ngModel)]='assetName'>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="assetdescription">Asset Description<font style="color:red;">*</font></label>
+                        <textarea class="form-control" id="assetdescription" placeholder="Enter Asset Description"
+                            [(ngModel)]='assetDescription'></textarea>
+                    </div>
+
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="costperday">Cost Per Day<font style="color:red;">*</font></label>
+                        <input type="text" class="form-control" id="costperday" placeholder="Enter Cost Per Day"
+                            [(ngModel)]='assetCostPerDay'>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="assetstockAvailability">Stock Availability<font style="color:red;">*</font></label>
+                        <input type="text" class="form-control" id="assetstockAvailability"
+                            placeholder="Enter Stock Availability" [(ngModel)]='assetStockAvailability'>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal-footer" *ngIf="forAdd">
+                <button type="button" class="btn btn-dark" id="btnAdd" class="btn btn-clr"
+                    (click)="postData()">Add</button>
+            </div>
+
+            <div class="modal-footer" *ngIf="forEdit">
+                <button type="button" class="btn btn-dark" id="btnUpdate" class="btn btn-clr"
+                    (click)="postData()">Update</button>
+            </div>
+        </div>
+    </div>
+</div>

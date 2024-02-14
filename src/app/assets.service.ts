@@ -10,10 +10,14 @@ export class AssetsService {
 
   constructor(private _http: HttpClient) { }
 
-  private apiUrl = 'http://localhost:5251/api/Assets';
+  private baseUrl = 'http://localhost:5251/api/Assets';
 
   getAssets(): Observable<IAssets[]> {
-    //console.log('Sending HTTP GET request to:', this.apiUrl);
-    return this._http.get<IAssets[]>(this.apiUrl);
+    return this._http.get<IAssets[]>(this.baseUrl);
   }
+
+  postData(data: IAssets): Observable<any> {
+    return this._http.post(this.baseUrl, data, { responseType: 'text' });
+}
+
 }

@@ -11,6 +11,7 @@ import { BodyComponent } from './body/body.component';
 import { AssetsComponent } from './assets/assets.component';
 import { VenueComponent } from './venue/venue.component';
 import { BookingsComponent } from './bookings/bookings.component';
+import { FormsModule } from '@angular/forms';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/assets', pathMatch: 'full' },
@@ -33,6 +34,7 @@ const appRoutes: Routes = [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
     RouterModule.forRoot(appRoutes, {useHash:true})
   ],
   providers: [],
