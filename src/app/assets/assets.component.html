@@ -37,7 +37,7 @@
             <!-- <td>{{ asset.assetId }}</td> -->
             <td>{{ asset.assetName }}</td>
             <td>{{ asset.assetDescription }}</td>
-            <td>{{ asset.assetCostPerDay }}</td>
+            <td>{{ asset.assetCostPerDay | currency: 'INR'}}</td>
             <td>{{ asset.assetStockAvailability }}</td>
             <td>
                 <a href="#" title="Edit" (click)="onEdit(asset)" data-toggle="modal" data-target="#editModal">
