@@ -24,14 +24,7 @@ export class AssetsComponent implements OnInit {
   constructor(private _assetsService: AssetsService) { }
 
   ngOnInit(): void {
-    this._assetsService.getAssets().subscribe(
-      (assetsData) => {
-        this.assets = assetsData;
-      },
-      (error) => {
-        console.error('Error retrieving assets:', error);
-      }
-    );
+    this.getAssetsdata();
   }
 
   onAdd(): void {
@@ -57,6 +50,17 @@ export class AssetsComponent implements OnInit {
     this.forEdit = true;
   }
 
+  getAssetsdata(){
+    this._assetsService.getAssets().subscribe(
+      (assetsData) => {
+        this.assets = assetsData;
+      },
+      (error) => {
+        console.error('Error retrieving assets:', error);
+      }
+    );
+  }
+
   editAsset(): void {
     const asset: IAssets = {
       assetId: this.assetId,
@@ -70,7 +74,7 @@ export class AssetsComponent implements OnInit {
       (response) => {
         this.closeModal();
         alert(JSON.parse(response).message);
-        window.location.reload();
+       // window.location.reload();
       },
       (error) => {
         console.log('Error posting data:', error);
@@ -91,7 +95,8 @@ export class AssetsComponent implements OnInit {
       (response) => {
         this.closeModal();
         alert(JSON.parse(response).message);
-        window.location.reload();
+       // window.location.reload();
+       
       },
       (error) => {
         console.log('Error: ' + error);
@@ -106,7 +111,7 @@ export class AssetsComponent implements OnInit {
         (response) => {
           this.closeModal();
           alert(JSON.parse(response).message);
-          window.location.reload();
+          this.getAssetsdata();
         },
         (error) => {
           console.log('Error: ' + error);

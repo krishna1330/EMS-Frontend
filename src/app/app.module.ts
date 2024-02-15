@@ -13,12 +13,12 @@ import { VenueComponent } from './venue/venue.component';
 import { BookingsComponent } from './bookings/bookings.component';
 import { FormsModule } from '@angular/forms';
 
-const appRoutes: Routes = [
-  { path: '', redirectTo: '/assets', pathMatch: 'full' },
-  { path: 'assets', component: AssetsComponent },
-  { path: 'venue', component: VenueComponent },
-  { path: 'bookings', component: BookingsComponent }
-];
+// const appRoutes: Routes = [
+//   { path: '', redirectTo: '/assets', pathMatch: 'full' },
+//   { path: 'assets', component: AssetsComponent },
+//   { path: 'venue', component: VenueComponent },
+//   { path: 'bookings', component: BookingsComponent }
+// ];
 
 @NgModule({
   declarations: [
@@ -35,7 +35,8 @@ const appRoutes: Routes = [
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot(appRoutes, {useHash:true})
+    AppRoutingModule
+    //RouterModule.forRoot(appRoutes, {useHash:true})
   ],
   providers: [],
   bootstrap: [AppComponent]
