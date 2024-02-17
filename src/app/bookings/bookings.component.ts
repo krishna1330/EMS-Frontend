@@ -4,6 +4,9 @@ import { IBookings } from './bookings';
 import { error } from 'jquery';
 import { VenueService } from '../venue.service';
 import { IVenue } from '../venue/venue';
+import { AssetsService } from '../assets.service';
+import { IEventAssets } from './eventAssets';
+import { IAssets } from '../assets/assets';
 
 @Component({
   selector: 'app-bookings',
@@ -14,7 +17,13 @@ import { IVenue } from '../venue/venue';
 export class BookingsComponent implements OnInit {
   venueDetails: IVenue[] = [];
   bookings: IBookings[] = [];
+  eventAssets: IEventAssets[] = [];
+  assets: IAssets[] = [];
   showModal: boolean = false;
+  showAssetModal: boolean = false;
+  assetId: number = 0;
+  quantity: number = 0;
+  assetName: string = '';
   forEdit: boolean = false;
   forAdd: boolean = false;
 
@@ -25,10 +34,45 @@ export class BookingsComponent implements OnInit {
   eventDateTime: string = '';
   venueId: number = 0;
 
-  constructor(private _bookingsService: BookingsService, private _venueService: VenueService) { }
+  constructor(private _bookingsService: BookingsService, private _venueService: VenueService, private _assetsService: AssetsService) { }
 
   ngOnInit(): void {
     this.getBookingsDetails();
+  }
+
+  onAddBtnAsset(booking: IBookings): void {
+    this.quantity = 0;
+    this.assetId = 0;
+    this.eventBookingId = booking.eventBookingId;
+    this._assetsService.getAssets().subscribe(
+      (assetsData) => {
+        this.assets = assetsData;
+      },
+      (error) => {
+        console.error('Error retrieving assets:', error);
+      }
+    );
+    this.showAssetModal = true;
+  }
+
+  addAsset(): void {
+    const asset: IEventAssets = {
+      eventBookingId: this.eventBookingId,
+      assetId: this.assetId,
+      quantity: this.quantity,
+      eventAssetId: 0
+    };
+    console.log(asset);
+    this._bookingsService.addEventAsset(asset).subscribe(
+      (response) => {
+        alert(JSON.parse(response).message);
+        this.closeModal();
+        this.getBookingsDetails();
+      },
+      (error) => {
+        console.log('Error: ' + error);
+      }
+    )
   }
 
   getBookingsDetails(): void {
@@ -66,12 +110,11 @@ export class BookingsComponent implements OnInit {
       eventBookingId: 0,
       venueName: ''
     };
-    console.log(book);
     this._bookingsService.addBooking(book).subscribe(
       (response) => {
-        alert(JSON.parse(response).message);  
+        alert(JSON.parse(response).message);
         this.closeModal();
-        this.getBookingsDetails();     
+        this.getBookingsDetails();
       },
       (error) => {
         console.log('Error: ' + error);
@@ -92,5 +135,6 @@ export class BookingsComponent implements OnInit {
 
   closeModal() {
     this.showModal = false;
+    this.showAssetModal = false;
   }
 }
