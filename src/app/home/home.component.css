@@ -1,0 +1,28 @@
+/* styles.css or your component-specific styles */
+.welcome-container {
+    text-align: center;
+    padding: 50px;
+  }
+  
+  .welcome-title {
+    font-size: 3em;
+    color: #333; /* Blue color */
+    margin-bottom: 20px;
+  }
+  
+  .welcome-description {
+    font-size: 1.5em;
+    color: #333;
+    font-style: italic;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 2s forwards; /* Add a fade-in animation */
+  }
+  
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  

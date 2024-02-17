@@ -12,6 +12,7 @@ import { AssetsComponent } from './assets/assets.component';
 import { VenueComponent } from './venue/venue.component';
 import { BookingsComponent } from './bookings/bookings.component';
 import { FormsModule } from '@angular/forms';
+import { HomeComponent } from './home/home.component';
 
 // const appRoutes: Routes = [
 //   { path: '', redirectTo: '/assets', pathMatch: 'full' },
@@ -28,7 +29,8 @@ import { FormsModule } from '@angular/forms';
     BodyComponent,
     AssetsComponent,
     VenueComponent,
-    BookingsComponent
+    BookingsComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
