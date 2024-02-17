@@ -14,4 +14,8 @@ export class BookingsService {
   getBookingsDetails(): Observable<IBookings[]> {
     return this._http.get<IBookings[]>(this.baseUrl + 'GetBookingsDetails');
   }
+
+  addBooking(data: IBookings): Observable<any> {
+    return this._http.post(this.baseUrl + 'AddBooking', data, { responseType: "text" });
+  }
 }

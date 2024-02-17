@@ -4,6 +4,6 @@ export interface IBookings {
     mobileNumber: string;
     venueId: number;
     venueName: string;
-    eventDateTime: Date;
+    eventDateTime: string;
     bookedHours: number;
 }

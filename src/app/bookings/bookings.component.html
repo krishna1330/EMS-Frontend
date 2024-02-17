@@ -16,7 +16,7 @@
 <div class="d-flex justify-content-between align-items-center">
     <h4 class="heading-fancy mb-0">Bookings Details</h4>
     <h4 class="mb-0">
-        <i class="fa-solid fa-circle-plus fa-2x" style="cursor: pointer;" title="Add Customer"></i>
+        <i class="fa-solid fa-circle-plus fa-2x" (click)="onAdd()" style="cursor: pointer;" title="Add Customer"></i>
     </h4>
 </div>
 
@@ -45,10 +45,76 @@
                     <i class="fa-regular fa-pen-to-square" style="color: #333;"></i>
                 </a>
                 &nbsp;
-                <a href="#" title="Delete" >
+                <a href="#" title="Delete">
                     <i class="fa-solid fa-trash" style="color: #333;"></i>
                 </a>
             </td>
         </tr>
     </tbody>
 </table>
+
+<!-- Modal -->
+<div class="modal" tabindex="-1" role="dialog" [style.display]="showModal ? 'block' : 'none'">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="editAssetTxt" *ngIf="forEdit">Edit Booking</h4>
+                <h4 class="modal-title" id="addAssetTxt" *ngIf="forAdd">Add Booking</h4>
+                <button type="button" class="close" (click)="closeModal()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="">Customer Name<font style="color:red;">*</font></label>
+                        <input type="text" class="form-control" id="" placeholder="Enter Customer Name"
+                            [(ngModel)]='customerName'>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="">Select Date<font style="color:red;">*</font></label>
+                        <input type="datetime-local" class="form-control" id="" placeholder="Select Date"
+                        [(ngModel)]="eventDateTime">
+                    </div>
+
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="">Mobile<font style="color:red;">*</font></label>
+                        <input type="text" class="form-control" id="" placeholder="Enter Mobile Number"
+                            [(ngModel)]='mobileNumber'>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="">Hours<font style="color:red;">*</font></label>
+                        <input type="text" class="form-control" id="" placeholder="Enter Hours"
+                            [(ngModel)]='bookedHours'>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="">Select Venue<font style="color:red;">*</font></label>
+                        <select class="form-control" id="venueS" placeholder="Venue" [(ngModel)]="venueId">
+                            <option value="" selected disabled hidden>Select Venue</option>
+                            <option *ngFor="let venue of venueDetails" [value]="venue.venueId">{{ venue.venueName }}</option>
+                        </select>                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer" *ngIf="forAdd">
+                <button type="button" class="btn btn-dark" id="btnAdd" class="btn btn-clr"
+                (click)="addBooking()">Add</button>
+            </div>
+
+            <!-- <div class="modal-footer" *ngIf="forEdit">
+                <button type="button" class="btn btn-dark" id="btnUpdate" class="btn btn-clr"
+                    (click)="editAsset()">Update</button>
+            </div> -->
+        </div>
+    </div>
+</div>
